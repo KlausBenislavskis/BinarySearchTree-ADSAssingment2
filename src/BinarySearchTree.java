@@ -35,12 +35,19 @@ public class BinarySearchTree<E extends Comparable<E>> extends BinaryTree<E> {
     }
 
     public E findMin() {
-        return super.inOrder().get(0);
+        return super.getRoot() == null ? null : findMin((BinarySearchTreeNode<E>) super.getRoot());
+    }
+
+    private E findMin(BinarySearchTreeNode<E> root) {
+        return root.getLeftChild() == null ? root.getElement() : findMin((BinarySearchTreeNode<E>) root.getLeftChild());
     }
 
     public E findMax() {
-        ArrayList<E> inOrder = super.inOrder();
-        return inOrder.get(inOrder.size() - 1);
+        return super.getRoot() == null ? null : findMax((BinarySearchTreeNode<E>) super.getRoot());
+    }
+
+    private E findMax(BinarySearchTreeNode<E> root) {
+        return root.getRightChild() == null ? root.getElement() : findMax((BinarySearchTreeNode<E>) root.getRightChild());
     }
 
     public boolean removeElement(E element) {
